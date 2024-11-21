@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function ScenarioPage() {
   return (
     <div className="space-y-8">
@@ -18,6 +20,11 @@ export default function ScenarioPage() {
             "She uses the insights to initiate a productive conversation with her manager",
             "Emily feels empowered to make positive changes in her work life, leading to improved job satisfaction and performance",
           ]}
+          icons={[
+            "/images/scenario_selfaware.webp",
+            "/images/scenario_productiveconvo.webp",
+            "/images/scenario_empowered.webp"
+          ]}
         />
         <ScenarioCard
           title="Michael's Team Building Initiative"
@@ -37,6 +44,12 @@ export default function ScenarioPage() {
             "The department sees an improvement in collaboration and productivity",
             "The success of this initiative leads to the broader adoption of Psyche's tools across the company",
           ]}
+          icons={[
+            "/images/scenario_teamunderstanding.webp",
+            "/images/scenario_addressconflicts.webp",
+            "/images/scenario_collaboration.webp",
+            "/images/scenario_successinitiative.webp"
+          ]}
         />
       </div>
     </div>
@@ -48,6 +61,7 @@ interface ScenarioCardProps {
   persona: string;
   scenario: string;
   outcomes: string[];
+  icons: string[];
 }
 
 function ScenarioCard({
@@ -55,6 +69,7 @@ function ScenarioCard({
   persona,
   scenario,
   outcomes,
+  icons
 }: ScenarioCardProps) {
   return (
     <div className="bg-black rounded-lg shadow-lg overflow-hidden">
@@ -68,6 +83,17 @@ function ScenarioCard({
           </div>
           <div>
             <h3 className="text-xl font-semibold mb-2">Outcomes</h3>
+            <div className="flex items-center mb-4 space-x-4 space-y-4">
+              {icons.map((icons, index) => (
+                <Image
+                src={icons}
+                width={96}
+                height={96}
+                alt={`${title}`}
+                className='rounded-full'
+              />
+              ))}
+            </div>
             <ul className="list-disc pl-5 space-y-1">
               {outcomes.map((outcome, index) => (
                 <li key={index} className="text-white-700">
