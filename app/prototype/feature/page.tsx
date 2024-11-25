@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Header } from "../components/page";
+import { Header } from "@/components/ui/Header";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
