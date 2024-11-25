@@ -1,41 +1,33 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Header } from "@/components/ui/Header";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-100">
-      {" "}
-      {/* Light gray background for the page */}
-      <header className="bg-blue-600 text-white py-6">
-        {" "}
-        {/* Blue header with white text */}
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold">Explore Psyche</h1>
-          <p className="mt-2">Realize your potential, find where you excel</p>
-        </div>
-      </header>
+      <Header />
       <main className="container mx-auto px-4 py-8">
         <section className="mb-12">
           <h2 className="text-2xl font-semibold mb-4 text-blue-800">
             Featured Assessments
-          </h2>{" "}
-          {/* Blue color for the section header */}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredAssessments.map((assessment) => (
-              <div
-                key={assessment.id}
-                className="border border-blue-300 rounded-lg p-4 bg-white shadow-md"
-              >
-                <h3 className="text-xl font-semibold mb-2 text-blue-600">
-                  {assessment.title}
-                </h3>
-                <p className="mb-4 text-gray-700">{assessment.description}</p>
-                <Link
-                  href={`/assessment_sketch`}
-                  className="inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
-                >
-                  Take Assessment
-                </Link>
-              </div>
+              <Card key={assessment.id}>
+                <CardHeader>
+                  <CardTitle className="text-blue-600">
+                    {assessment.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4 text-gray-700">{assessment.description}</p>
+                  <Button asChild>
+                    <Link href="/assessment">Take Assessment</Link>
+                  </Button>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </section>
@@ -46,16 +38,23 @@ export default function HomePage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((feature) => (
-              <div
-                key={feature.title}
-                className="border border-blue-300 rounded-lg p-4 bg-white shadow-md"
+              <Link
+                href={`/feature/${feature.id}`}
+                key={feature.id}
+                className="block"
               >
-                <feature.icon className="w-10 h-10 mb-2 text-blue-600" />
-                <h3 className="text-xl font-semibold mb-2 text-blue-600">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-700">{feature.description}</p>
-              </div>
+                <Card className="h-full hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <feature.icon className="w-10 h-10 mb-2 text-blue-600" />
+                    <CardTitle className="text-blue-600">
+                      {feature.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-700">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </section>
@@ -69,17 +68,12 @@ export default function HomePage() {
             tips on how to become a high-demand employee.
           </p>
           <form className="flex flex-col sm:flex-row gap-4">
-            <input
+            <Input
               type="email"
               placeholder="Enter your email"
-              className="flex-grow px-4 py-2 rounded-md border border-blue-300 bg-white"
+              className="flex-grow"
             />
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
-            >
-              Subscribe
-            </button>
+            <Button type="submit">Subscribe</Button>
           </form>
         </section>
       </main>
@@ -102,18 +96,19 @@ const featuredAssessments = [
   },
   {
     id: 2,
-    title: "Personality Test 3",
-    description: "Take a test to find your strongest traits as an individual",
+    title: "Personality Test 2",
+    description: "Discover your unique personality traits and strengths",
   },
   {
     id: 3,
     title: "Personality Test 3",
-    description: "Take a test to find your strongest traits as an individual",
+    description: "Uncover hidden aspects of your personality",
   },
 ];
 
 const features = [
   {
+    id: "comprehensive-assessments",
     icon: ({ className }: { className?: string }) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -135,6 +130,7 @@ const features = [
       "Our assessments cover several aspects of the human psyche, from little decisions, to personalities.",
   },
   {
+    id: "real-world-scenarios",
     icon: ({ className }: { className?: string }) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -156,6 +152,7 @@ const features = [
       "Find who you are when the cards are down. What do you do when people depend on you?",
   },
   {
+    id: "online-convenience",
     icon: ({ className }: { className?: string }) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
