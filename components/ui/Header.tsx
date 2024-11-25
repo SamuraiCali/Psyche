@@ -12,13 +12,16 @@ export function Header() {
           <nav>
             <ul className="flex space-x-4">
               <li>
-                <Link href="app/prototype/page.tsx" className="hover:underline">
+                <Link
+                  href="https://github.com/SamuraiCali/psyche/blob/acef344b5535a4d89e8f780a35365757423e2932/app/prototype/page.tsx"
+                  className="hover:underline"
+                >
                   Home
                 </Link>
               </li>
               <li>
                 <Link
-                  href="app/prototype/login/page.tsx"
+                  href="https://github.com/SamuraiCali/psyche/blob/eb03075028642b278df3bec72d2b7cf5de353c1b/app/prototype/login/page.tsx"
                   className="hover:underline"
                 >
                   Login
@@ -26,7 +29,7 @@ export function Header() {
               </li>
               <li>
                 <Link
-                  href="app/prototype/user/page.tsx"
+                  href="https://github.com/SamuraiCali/psyche/blob/a3ddca514afda5d5b5ca7c6dc169e8d161120476/app/prototype/user/page.tsx"
                   className="hover:underline"
                 >
                   User Profile
@@ -34,7 +37,7 @@ export function Header() {
               </li>
               <li>
                 <Link
-                  href="app/prototype/scores/page.tsx"
+                  href="https://github.com/SamuraiCali/psyche/blob/a3ddca514afda5d5b5ca7c6dc169e8d161120476/app/prototype/scores/page.tsx"
                   className="hover:underline"
                 >
                   Your Scores
