@@ -58,9 +58,21 @@ export default function Home() {
           href="/homepage_sketch"
           className="bg-purple-100 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
         >
-          <h2 className="text-2xl font-semibold mb-2 text-black">Website Sketch</h2>
+          <h2 className="text-2xl font-semibold mb-2 text-black">
+            Website Sketch
+          </h2>
           <p className="text-black">
             View an interactive sketch of how the final site might look and feel
+          </p>
+        </Link>
+        <Link
+          href="/prototype"
+          className="bg-purple-100 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+        >
+          <h2 className="text-2xl font-semibold mb-2 text-black">Prototype</h2>
+          <p className="text-black">
+            View an interactive prototype of how the final site might look and
+            feel
           </p>
         </Link>
       </div>
