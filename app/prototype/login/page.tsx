@@ -3,9 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Input } from "@nextui-org/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Header } from "../components/Header";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -22,7 +21,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <Header />
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">

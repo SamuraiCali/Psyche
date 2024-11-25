@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Header } from "../components/Header";
+import { Header } from "../components/page";
 
 export default function ScoresPage() {
   // In a real application, you would fetch this data from an API
