@@ -2,34 +2,56 @@
 
 import { useUser } from "@/lib/UserContext";
 
-export default function UserProfile() {
-  const { user } = useUser();
+export default function UserProfilePage() {
+  const [user, setUser] = useState(UserManager.getInstance().getCurrentUser());
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, [user, router]);
+
+  const handleLogout = () => {
+    UserManager.getInstance().logout();
+    setUser(null);
+    router.push("/login");
+  };
 
   if (!user) {
     return <p>Loading...</p>;
   }
 
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-2xl font-bold mb-4">User Profile</h1>
-      <p>
-        <strong>Username:</strong> {user.username}
-      </p>
-      <h2 className="text-xl font-bold mt-4">Test Scores</h2>
-      <ul>
-        <li>
-          <strong>Leadership:</strong>{" "}
-          {user.testScores.leadership ?? "Not taken"}
-        </li>
-        <li>
-          <strong>Neurodivergence:</strong>{" "}
-          {user.testScores.neurodivergence ?? "Not taken"}
-        </li>
-        <li>
-          <strong>Workplace Personality:</strong>{" "}
-          {user.testScores.workplacePersonality ?? "Not taken"}
-        </li>
-      </ul>
+    <div className="min-h-screen bg-white">
+      <Header />
+      <div className="container mx-auto px-4 py-12">
+        <h1 className="text-3xl font-bold mb-8 text-center text-gray-900">
+          User Profile
+        </h1>
+        <Card className="max-w-2xl mx-auto">
+          <CardHeader>
+            <CardTitle className="text-2xl font-semibold text-gray-900">
+              Personal Information
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+              <div className="sm:col-span-1">
+                <dt className="text-sm font-medium text-gray-500">
+                  Email address
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900">{user.email}</dd>
+              </div>
+            </dl>
+            <div className="mt-8">
+              <Button onClick={handleLogout} className="w-full">
+                Log Out
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
