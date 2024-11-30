@@ -1,24 +1,15 @@
-"use client";
-
-import { useRouter } from "next/navigation";
+import { getUser, logout } from "@/app/prototype/login/auth";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/ui/Header";
-import { Button } from "@/components/ui/button";
-import { getUser, logout } from "@/app/prototype/login/auth";
+import { redirect } from "next/navigation";
 
-export default function UserProfilePage() {
-  const router = useRouter();
-  const user = getUser();
+export default async function UserProfilePage() {
+  const user = await getUser();
 
   if (!user) {
-    router.push("/login");
-    return null;
+    redirect("/login");
   }
-
-  const handleLogout = () => {
-    logout();
-    router.push("/login");
-  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -36,28 +27,18 @@ export default function UserProfilePage() {
           <CardContent>
             <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
               <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500">Full name</dt>
-                <dd className="mt-1 text-sm text-gray-900">{user.name}</dd>
-              </div>
-              <div className="sm:col-span-1">
                 <dt className="text-sm font-medium text-gray-500">
                   Email address
                 </dt>
-                <dd className="mt-1 text-sm text-gray-900">{user.email}</dd>
-              </div>
-              <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500">Company</dt>
-                <dd className="mt-1 text-sm text-gray-900">{user.company}</dd>
-              </div>
-              <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500">Position</dt>
-                <dd className="mt-1 text-sm text-gray-900">{user.position}</dd>
+                <dd className="mt-1 text-sm text-gray-900">{user}</dd>
               </div>
             </dl>
             <div className="mt-8">
-              <Button onClick={handleLogout} className="w-full">
-                Log Out
-              </Button>
+              <form action={logout}>
+                <Button type="submit" className="w-full">
+                  Log Out
+                </Button>
+              </form>
             </div>
           </CardContent>
         </Card>
