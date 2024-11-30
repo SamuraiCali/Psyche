@@ -1,4 +1,5 @@
-import { useRouter } from "next/router";
+"use client";
+import { useRouter } from "next/navigation";
 import { useLocalStorage } from "@/lib/useLocalStorage";
 import { useState } from "react";
 

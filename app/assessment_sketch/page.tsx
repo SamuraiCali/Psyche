@@ -12,7 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import UserManager from "@/lib/UserManager";
 
 const quizQuestions = [
   {
@@ -56,7 +55,6 @@ export default function QuizPage() {
       // Calculate score (for simplicity, we'll use the number of questions answered)
       const score =
         (answers.filter((a) => a !== -1).length / quizQuestions.length) * 100;
-      UserManager.getInstance().addScore("Personality Test", score);
       router.push("/scores");
     }
   };

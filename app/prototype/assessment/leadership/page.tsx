@@ -1,4 +1,4 @@
-// src/pages/Assessment.tsx
+"use client";
 import React, { useState } from "react";
 import { useUser } from "@/lib/UserContext";
 

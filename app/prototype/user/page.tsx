@@ -1,3 +1,4 @@
+"use client";
 import { useLocalStorage } from "@/lib/useLocalStorage";
 
 export default function UserProfile() {
