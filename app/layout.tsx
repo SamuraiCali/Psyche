@@ -57,6 +57,12 @@ export default function RootLayout({
                 <Link href="/flowchart" className="hover:text-gray-300">
                   Flowchart
                 </Link>
+                <Link href="/homepagesketch" className="hover:text-gray-300">
+                  Website Sketch
+                </Link>
+                <Link href="/prototype" className="hover:text-gray-300">
+                  Prototype
+                </Link>
               </li>
             </ul>
           </nav>

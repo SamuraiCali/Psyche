@@ -1,23 +1,35 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/ui/Header";
+import { Button } from "@/components/ui/button";
+import { getUser, logout } from "@/app/prototype/login/auth";
 
 export default function UserProfilePage() {
-  // In a real application, you would fetch this data from an API
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    company: "Acme Inc.",
-    position: "Software Developer",
+  const router = useRouter();
+  const user = getUser();
+
+  if (!user) {
+    router.push("/login");
+    return null;
+  }
+
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12">
+    <div className="min-h-screen bg-white">
       <Header />
-      <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-8 text-center">User Profile</h1>
+      <div className="container mx-auto px-4 py-12">
+        <h1 className="text-3xl font-bold mb-8 text-center text-gray-900">
+          User Profile
+        </h1>
         <Card className="max-w-2xl mx-auto">
           <CardHeader>
-            <CardTitle className="text-2xl font-semibold">
+            <CardTitle className="text-2xl font-semibold text-gray-900">
               Personal Information
             </CardTitle>
           </CardHeader>
@@ -42,6 +54,11 @@ export default function UserProfilePage() {
                 <dd className="mt-1 text-sm text-gray-900">{user.position}</dd>
               </div>
             </dl>
+            <div className="mt-8">
+              <Button onClick={handleLogout} className="w-full">
+                Log Out
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
