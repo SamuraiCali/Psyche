@@ -1,17 +1,20 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useLocalStorage } from "@/lib/useLocalStorage";
+
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/lib/UserContext";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useLocalStorage("user", null);
+  const { setUser } = useUser();
   const router = useRouter();
 
   const handleLogin = () => {
     if (username && password) {
-      setUser({ username });
+      // Set user in context
+      setUser({ username, isAuthenticated: true, testScores: {} });
+      // Redirect to the User Profile page
       router.push("/prototype/user");
     } else {
       alert("Please enter your credentials.");

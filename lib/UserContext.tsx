@@ -1,33 +1,34 @@
-// src/context/UserContext.tsx
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
-interface UserData {
+interface User {
   username: string;
-  testScores: number[];
+  isAuthenticated: boolean;
+  testScores: {
+    leadership?: number;
+    neurodivergence?: number;
+    workplacePersonality?: number;
+  };
 }
 
-interface UserContextProps {
-  user: UserData | null;
-  setUser: React.Dispatch<React.SetStateAction<UserData | null>>;
+interface UserContextType {
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
-const UserContext = createContext<UserContextProps | undefined>(undefined);
+const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
+export const UserProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<UserData | null>(
-    JSON.parse(localStorage.getItem("user") || "null")
-  );
-
-  // Sync with localStorage
-  React.useEffect(() => {
-    if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
-    } else {
-      localStorage.removeItem("user");
-    }
-  }, [user]);
+  const [user, setUser] = useState<User | null>({
+    username: "",
+    isAuthenticated: false,
+    testScores: {
+      leadership: undefined,
+      neurodivergence: undefined,
+      workplacePersonality: undefined,
+    },
+  });
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -36,8 +37,10 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export const useUser = () => {
+export const useUser = (): UserContextType => {
   const context = useContext(UserContext);
-  if (!context) throw new Error("useUser must be used within a UserProvider");
+  if (!context) {
+    throw new Error("useUser must be used within a UserProvider");
+  }
   return context;
 };
