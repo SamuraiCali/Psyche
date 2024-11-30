@@ -46,7 +46,7 @@ export default function HomePage() {
                 <CardContent>
                   <p className="mb-4 text-gray-700">{assessment.description}</p>
                   <Button asChild>
-                    <Link href={assessment.link}>Take Assessment</Link>
+                    <Link href="@/app/assessment_sketch">Take Assessment</Link>
                   </Button>
                 </CardContent>
               </Card>
