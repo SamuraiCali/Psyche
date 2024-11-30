@@ -5,28 +5,20 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { login } from "./auth";
-import { Header } from "@/components/ui/Header";
+import UserManager from "@/lib/UserManager";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
-  const [state, setState] = useState<{
-    success: boolean;
-    error?: string;
-  } | null>(null);
-  const [isPending, setIsPending] = useState(false);
 
-  const action = async (formData: FormData) => {
-    setIsPending(true);
-    const result = await login(formData);
-    setState(result);
-    setIsPending(false);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would typically validate the credentials
+    console.log("Login attempt with:", { email, password });
+    UserManager.getInstance().login(email);
+    router.push("/user");
   };
-
-  if (state?.success) {
-    router.push("@/app/prototype/user/page");
-    return null;
-  }
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center">
@@ -37,7 +29,7 @@ export default function LoginPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form action={action} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label
                 htmlFor="email"
@@ -47,8 +39,9 @@ export default function LoginPage() {
               </label>
               <Input
                 id="email"
-                name="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 className="mt-1 bg-white text-gray-900"
               />
@@ -62,18 +55,16 @@ export default function LoginPage() {
               </label>
               <Input
                 id="password"
-                name="password"
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 className="mt-1 bg-white text-gray-900"
               />
             </div>
-            <Button type="submit" className="w-full" disabled={isPending}>
-              {isPending ? "Logging in..." : "Log In"}
+            <Button type="submit" className="w-full">
+              Log In
             </Button>
-            {state?.error && (
-              <p className="text-red-500 text-sm text-center">{state.error}</p>
-            )}
           </form>
         </CardContent>
       </Card>

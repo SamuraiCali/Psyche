@@ -1,14 +1,29 @@
-import { getUser, logout } from "@/app/prototype/login/auth";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/ui/Header";
-import { redirect } from "next/navigation";
+import UserManager from "@/lib/UserManager";
 
-export default async function UserProfilePage() {
-  const user = await getUser();
+export default function UserProfilePage() {
+  const [user, setUser] = useState(UserManager.getInstance().getCurrentUser());
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, [user, router]);
+
+  const handleLogout = () => {
+    UserManager.getInstance().logout();
+    router.push("/login");
+  };
 
   if (!user) {
-    redirect("/login");
+    return null;
   }
 
   return (
@@ -30,15 +45,13 @@ export default async function UserProfilePage() {
                 <dt className="text-sm font-medium text-gray-500">
                   Email address
                 </dt>
-                <dd className="mt-1 text-sm text-gray-900">{user}</dd>
+                <dd className="mt-1 text-sm text-gray-900">{user.email}</dd>
               </div>
             </dl>
             <div className="mt-8">
-              <form action={logout}>
-                <Button type="submit" className="w-full">
-                  Log Out
-                </Button>
-              </form>
+              <Button onClick={handleLogout} className="w-full text-black">
+                Log Out
+              </Button>
             </div>
           </CardContent>
         </Card>

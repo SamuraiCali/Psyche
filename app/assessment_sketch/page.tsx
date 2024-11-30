@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import UserManager from "@/lib/UserManager";
 
 const quizQuestions = [
   {
@@ -52,8 +53,11 @@ export default function QuizPage() {
     if (currentQuestion < quizQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      // Redirect to the results_sketch page without any query params
-      router.push("/results_sketch");
+      // Calculate score (for simplicity, we'll use the number of questions answered)
+      const score =
+        (answers.filter((a) => a !== -1).length / quizQuestions.length) * 100;
+      UserManager.getInstance().addScore("Personality Test", score);
+      router.push("/scores");
     }
   };
 
@@ -63,7 +67,7 @@ export default function QuizPage() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <Card className="w-full max-w-2xl bg-white shadow-lg rounded-lg">
         <CardHeader className="bg-blue-600 text-white p-4 rounded-t-lg">
-          <CardTitle className="text-2xl font-bold">UI Design Quiz</CardTitle>
+          <CardTitle className="text-2xl font-bold">Personality Test</CardTitle>
         </CardHeader>
         <CardContent className="p-6">
           <h2 className="text-xl font-semibold mb-4 text-blue-800">

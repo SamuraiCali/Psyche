@@ -6,7 +6,7 @@ import { Header } from "@/components/ui/Header";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-white">
       <Header />
       <main className="container mx-auto px-4 py-8">
         <section className="mb-12">
@@ -38,12 +38,8 @@ export default function HomePage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((feature) => (
-              <Link
-                href={`/feature/${feature.id}`}
-                key={feature.id}
-                className="block"
-              >
-                <Card className="h-full">
+              <div key={feature.id} className="block">
+                <Card className="h-full hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <feature.icon className="w-10 h-10 mb-2 text-blue-600" />
                     <CardTitle className="text-blue-600">
@@ -52,9 +48,12 @@ export default function HomePage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-700">{feature.description}</p>
+                    <p className="mt-2 text-sm text-gray-600">
+                      {feature.details}
+                    </p>
                   </CardContent>
                 </Card>
-              </Link>
+              </div>
             ))}
           </div>
         </section>
@@ -91,18 +90,18 @@ export default function HomePage() {
 const featuredAssessments = [
   {
     id: 1,
-    title: "Personality Test 1",
-    description: "Take a test to find your strongest traits as an individual",
-  },
-  {
-    id: 2,
-    title: "Personality Test 2",
+    title: "Workplace Personality Test",
     description: "Discover your unique personality traits and strengths",
   },
   {
+    id: 2,
+    title: "Neurodivergancy Test",
+    description: "Understand how your brain works and how to leverage it",
+  },
+  {
     id: 3,
-    title: "Personality Test 3",
-    description: "Uncover hidden aspects of your personality",
+    title: "Leadership Style Assessment",
+    description: "Uncover your leadership style and potential",
   },
 ];
 
@@ -128,6 +127,8 @@ const features = [
     title: "Comprehensive Assessments",
     description:
       "Our assessments cover several aspects of the human psyche, from little decisions, to personalities.",
+    details:
+      "At Psyche, we believe in providing a holistic view of your personality and potential. Our comprehensive assessments explore various facets of your psyche, including decision-making processes, emotional intelligence, cognitive abilities, and interpersonal skills.",
   },
   {
     id: "real-world-scenarios",
@@ -150,6 +151,8 @@ const features = [
     title: "Real-world Scenarios",
     description:
       "Find who you are when the cards are down. What do you do when people depend on you?",
+    details:
+      "Our assessments incorporate real-world scenarios that challenge you to think on your feet. These situations simulate high-pressure environments, team dynamics, and complex decision-making processes.",
   },
   {
     id: "online-convenience",
@@ -172,5 +175,7 @@ const features = [
     title: "Online Convenience",
     description:
       "No need to travel for assessments. Complete them at your convenience.",
+    details:
+      "Our platform is accessible anytime, anywhere. Take assessments from the comfort of your home, during your lunch break, or whenever suits you best. Our platform is optimized for various devices, allowing seamless switching between computer, tablet, or smartphone.",
   },
 ];
