@@ -43,7 +43,7 @@ export default function HomePage() {
                 key={feature.id}
                 className="block"
               >
-                <Card className="h-full hover:shadow-lg transition-shadow">
+                <Card className="h-full">
                   <CardHeader>
                     <feature.icon className="w-10 h-10 mb-2 text-blue-600" />
                     <CardTitle className="text-blue-600">

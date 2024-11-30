@@ -23,19 +23,10 @@ export async function login(formData: FormData) {
   return { success: false, error: "Invalid credentials" };
 }
 
-export function logout() {
+export async function logout() {
   cookies().delete("user");
 }
 
-export function getUser() {
-  const email = cookies().get("user")?.value;
-  if (!email) return null;
-
-  // In a real application, you would fetch this data from a database
-  return {
-    name: "John Doe",
-    email: email,
-    company: "Acme Inc.",
-    position: "Software Developer",
-  };
+export async function getUser() {
+  return cookies().get("user")?.value;
 }
