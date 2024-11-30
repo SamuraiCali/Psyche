@@ -24,13 +24,12 @@ export default function LoginPage() {
   };
 
   if (state?.success) {
-    router.push("/user");
+    router.push("@/app/prototype/user/page");
     return null;
   }
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center">
-      <Header />
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center text-gray-900">

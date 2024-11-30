@@ -20,7 +20,7 @@ export async function login(formData: FormData) {
     return { success: true };
   }
 
-  return { success: false, error: "Invalid credentials" };
+  return { success: true, error: "Invalid credentials" };
 }
 
 export async function logout() {
