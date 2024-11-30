@@ -1,73 +1,45 @@
-"use client";
-
+import { useRouter } from "next/router";
+import { useLocalStorage } from "@/lib/useLocalStorage";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import UserManager from "@/lib/UserManager";
 
-export default function LoginPage() {
-  const [email, setEmail] = useState("");
+export default function Login() {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useLocalStorage("user", null);
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would typically validate the credentials
-    console.log("Login attempt with:", { email, password });
-    UserManager.getInstance().login(email);
-    router.push("/user");
+  const handleLogin = () => {
+    if (username && password) {
+      setUser({ username });
+      router.push("/prototype/user");
+    } else {
+      alert("Please enter your credentials.");
+    }
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center text-gray-900">
-            Login to Psyche
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email
-              </label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="mt-1 bg-white text-gray-900"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="mt-1 bg-white text-gray-900"
-              />
-            </div>
-            <Button type="submit" className="w-full">
-              Log In
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+    <div className="container mx-auto">
+      <h1 className="text-2xl">Login</h1>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        className="border p-2 mb-2"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="border p-2 mb-2"
+      />
+      <button
+        onClick={handleLogin}
+        className="bg-blue-600 text-white px-4 py-2"
+      >
+        Login
+      </button>
     </div>
   );
 }
