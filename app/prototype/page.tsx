@@ -4,6 +4,27 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/ui/Header";
 
+const featuredAssessments = [
+  {
+    id: 1,
+    title: "Leadership Assessment",
+    description: "Discover your leadership style and strengths",
+    link: "/assessments/leadership",
+  },
+  {
+    id: 2,
+    title: "Neurodiversity Assessment",
+    description: "Discover your unique personality traits and strengths",
+    link: "/assessment",
+  },
+  {
+    id: 3,
+    title: "Workplace Personality Assessment",
+    description: "Uncover hidden aspects of your personality",
+    link: "/assessment",
+  },
+];
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
@@ -22,9 +43,9 @@ export default function HomePage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="mb-4 text-blue-600">{assessment.description}</p>
+                  <p className="mb-4 text-gray-700">{assessment.description}</p>
                   <Button asChild>
-                    <Link href="@/app/assessment_sketch">Take Assessment</Link>
+                    <Link href={assessment.link}>Take Assessment</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -86,24 +107,6 @@ export default function HomePage() {
     </div>
   );
 }
-
-const featuredAssessments = [
-  {
-    id: 1,
-    title: "Workplace Personality Test",
-    description: "Discover your unique personality traits and strengths",
-  },
-  {
-    id: 2,
-    title: "Neurodivergancy Test",
-    description: "Understand how your brain works and how to leverage it",
-  },
-  {
-    id: 3,
-    title: "Leadership Style Assessment",
-    description: "Uncover your leadership style and potential",
-  },
-];
 
 const features = [
   {

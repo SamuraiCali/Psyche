@@ -19,6 +19,7 @@ export default function UserProfilePage() {
 
   const handleLogout = () => {
     UserManager.getInstance().logout();
+    setUser(null);
     router.push("/login");
   };
 
@@ -49,7 +50,7 @@ export default function UserProfilePage() {
               </div>
             </dl>
             <div className="mt-8">
-              <Button onClick={handleLogout} className="w-full text-black">
+              <Button onClick={handleLogout} className="w-full">
                 Log Out
               </Button>
             </div>
